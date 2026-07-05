@@ -27,7 +27,7 @@ const data = {
         {name:"IP2Location", description:"Geolocation and proxy/VPN detection", link:"https://www.ip2location.com"},
         {name:"ICANN Lookup", description:"WHOIS and domain registration lookup", link:"https://lookup.icann.org"},
         {name:"BGPView", description:"ASN and BGP routing information", link:"https://bgpview.io"},
-        {name:"Cisco Talos Intelligence", description:"IP and domain reputation", link:"https://talosintelligence.com"}
+        {name:"Cisco Talos Intelligence", description:"IP and domain reputation", link:"https://talosintelligence.com"},
     ],
 
     domain: [
