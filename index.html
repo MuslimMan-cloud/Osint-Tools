@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-6ZM4V4SXXV"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-6ZM4V4SXXV');
+</script>
+<meta charset="UTF-8">
+<title>Osint Tools</title>
+<meta name="description" content="Free OSINT tools for username lookup, IP lookup, email investigation and cybersecurity research.">
+<meta name="keywords" content="OSINT, OSINT tools, Username Lookup, IP Lookup, Email Lookup, Cybersecurity">
+<meta name="robots" content="index, follow">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- Font Awesome -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<link rel="icon" type="image/png" href="osint-tools.png">
+
+<style>
+body{
+    margin:0;
+    font-family:Arial;
+    background:linear-gradient(135deg,#020b1f,#031a3d,#020817);
+    color:white;
+}
+
+/* HEADER */
+header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:20px;
+}
+
+h1{
+    color:#00ff1a;
+    text-shadow:0 0 10px #7CFF8A;
+}
+
+/* SEARCH */
+#searchBox{
+    padding:10px;
+    width:250px;
+    border-radius:8px;
+    border:2px solid #00ff1a;
+    background:#061a3a;
+    color:white;
+}
+
+/* STATS */
+.stats{
+    display:flex;
+    gap:15px;
+    padding:10px 20px;
+}
+
+/* CONTAINER */
+.container{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+    gap:15px;
+    padding:20px;
+}
+
+/* CARD */
+.card{
+    background:rgba(255,255,255,0.05);
+    border:1px solid #1eff00;
+    padding:15px;
+    border-radius:12px;
+    box-shadow:0 0 10px rgba(0,255,100,0.2);
+    transition:0.3s;
+    position:relative;
+}
+
+.card:hover{
+    transform:translateY(-5px);
+    box-shadow:0 0 20px #7CFF8A;
+}
+
+/* BUTTONS */
+button{
+    margin:5px;
+    padding:6px 10px;
+    border:none;
+    border-radius:6px;
+    cursor:pointer;
+}
+
+.open{background:#068b14;}
+.copy{background:#0d1fc4;color:white;}
+.fav{background:#db700d;}
+.pin{background:#ad1111;color:white;}
+
+/* CATEGORY */
+.cat{
+    font-size:12px;
+    color:#807e7e;
+}
+
+/* RIPPLE */
+.ripple{
+    position:absolute;
+    background:rgba(255,255,255,0.5);
+    border-radius:50%;
+    transform:scale(0);
+    animation:ripple 0.6s linear;
+}
+
+@keyframes ripple{
+    to{transform:scale(4);opacity:0;}
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<h1>Osint-Tools</h1>
+<input id="searchBox" placeholder="Search...">
+</header>
+
+<div class="stats">
+<div>Total: <span id="total"></span></div>
+<div>Favorites: <span id="favCount"></span></div>
+</div>
+
+<div class="container" id="container"></div>
+
+<script>
+// ================= DATA =================
+let tools = [
+{name:"Shodan",url:"https://shodan.io",cat:"IP"},
+{name:"Censys",url:"https://censys.io",cat:"IP"},
+{name:"VirusTotal",url:"https://virustotal.com",cat:"Domain"},
+{name:"Hunter.io",url:"https://hunter.io",cat:"Email"},
+{name:"HaveIBeenPwned",url:"https://haveibeenpwned.com",cat:"Email"},
+{name:"URLScan",url:"https://urlscan.io",cat:"Domain"},
+{name:"Wayback Machine",url:"https://archive.org",cat:"Search"},
+{name:"DNSDumpster",url:"https://dnsdumpster.com",cat:"Domain"},
+{name:"IntelX",url:"https://intelx.io",cat:"Search"},
+{name:"OTX AlienVault",url:"https://otx.alienvault.com",cat:"IP"},
+{name:"Holehe",url:"https://github.com/megadose/holehe",cat:"Email"},
+{name:"ThatsThem",url:"https://thatsthem.com/reverse-email-lookup",cat:"Email"},
+{name:"IPinfo",url:"https://ipinfo.io",cat:"IP"},
+{name:"SecurityTrails",url:"https://securitytrails.com/",cat:"Domain"},
+{name:"WHOXY",url:"https://www.whoxy.com/",cat:"Domain"},
+{name:"crt.sh",url:"https://crt.sh/",cat:"Domain"},
+];
+
+// ================= STORAGE =================
+let fav = JSON.parse(localStorage.getItem("fav")||"[]");
+let pin = JSON.parse(localStorage.getItem("pin")||"[]");
+
+// ================= RENDER =================
+function render(list){
+let c=document.getElementById("container");
+c.innerHTML="";
+
+list.sort((a,b)=> pin.includes(b.name)-pin.includes(a.name));
+
+list.forEach(t=>{
+
+let isFav=fav.includes(t.name);
+let isPin=pin.includes(t.name);
+
+c.innerHTML+=`
+<div class="card" onclick="ripple(event)">
+<div class="cat">${t.cat}</div>
+<h3>${t.name}</h3>
+
+<button class="open" onclick="openLink('${t.url}')"><i class="fa fa-link"></i></button>
+<button class="copy" onclick="copyLink('${t.url}')"><i class="fa fa-copy"></i></button>
+<button class="fav" onclick="toggleFav('${t.name}')">⭐</button>
+<button class="pin" onclick="togglePin('${t.name}')">📌</button>
+</div>
+`;
+});
+
+document.getElementById("total").innerText=list.length;
+document.getElementById("favCount").innerText=fav.length;
+}
+render(tools);
+
+// ================= FUNCTIONS =================
+function openLink(url){
+window.open(url,"_blank");
+}
+
+function copyLink(url){
+navigator.clipboard.writeText(url);
+alert("Copied!");
+}
+
+function toggleFav(name){
+fav.includes(name)?fav=fav.filter(x=>x!=name):fav.push(name);
+localStorage.setItem("fav",JSON.stringify(fav));
+render(tools);
+}
+
+function togglePin(name){
+pin.includes(name)?pin=pin.filter(x=>x!=name):pin.push(name);
+localStorage.setItem("pin",JSON.stringify(pin));
+render(tools);
+}
+
+// SEARCH
+document.getElementById("searchBox").addEventListener("input",e=>{
+let val=e.target.value.toLowerCase();
+render(tools.filter(t=>t.name.toLowerCase().includes(val)||t.cat.toLowerCase().includes(val)));
+});
+
+// CTRL + K
+document.addEventListener("keydown",e=>{
+if(e.ctrlKey && e.key==="k"){
+e.preventDefault();
+document.getElementById("searchBox").focus();
+}
+});
+
+// RIPPLE EFFECT
+function ripple(e){
+let r=document.createElement("span");
+r.className="ripple";
+r.style.left=e.offsetX+"px";
+r.style.top=e.offsetY+"px";
+e.target.appendChild(r);
+setTimeout(()=>r.remove(),600);
+}
+</script>
+
+</body>
+</html>
