@@ -18,16 +18,16 @@ const data = {
     ],
 
     ip: [
-        {name:"Tool Name", description:"Paragraph about the tool.", link:"#"},
-        {name:"Tool Name", description:"Paragraph about the tool.", link:"#"},
-        {name:"Tool Name", description:"Paragraph about the tool.", link:"#"},
-        {name:"Tool Name", description:"Paragraph about the tool.", link:"#"},
-        {name:"Tool Name", description:"Paragraph about the tool.", link:"#"},
-        {name:"Tool Name", description:"Paragraph about the tool.", link:"#"},
-        {name:"Tool Name", description:"Paragraph about the tool.", link:"#"},
-        {name:"Tool Name", description:"Paragraph about the tool.", link:"#"},
-        {name:"Tool Name", description:"Paragraph about the tool.", link:"#"},
-        {name:"Tool Name", description:"Paragraph about the tool.", link:"#"}
+        {name:"AbuseIPDB", description:"IP reputation and abuse reports", link:"https://www.abuseipdb.com"},
+        {name:"Shodan", description:"Search internet-connected devices", link:"https://www.shodan.io"},
+        {name:"Censys", description:"Host, certificate, and service search", link:"https://search.censys.io"},
+        {name:"VirusTotal", description:"IP, domain, URL, and file reputation", link:"https://www.virustotal.com"},
+        {name:"GreyNoise", description:"Internet scanner and background noise analysis", link:"https://www.greynoise.io"},
+        {name:"IPinfo", description:"IP geolocation, ASN, and ISP lookup", link:"https://ipinfo.io"},
+        {name:"IP2Location", description:"Geolocation and proxy/VPN detection", link:"https://www.ip2location.com"},
+        {name:"ICANN Lookup", description:"WHOIS and domain registration lookup", link:"https://lookup.icann.org"},
+        {name:"BGPView", description:"ASN and BGP routing information", link:"https://bgpview.io"},
+        {name:"Cisco Talos Intelligence", description:"IP and domain reputation", link:"https://talosintelligence.com"}
     ],
 
     domain: [
