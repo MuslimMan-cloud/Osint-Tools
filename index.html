@@ -1,146 +1,83 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-6ZM4V4SXXV"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OSINT TOOLS</title>
 
-  gtag('config', 'G-6ZM4V4SXXV');
-</script>
-<meta charset="UTF-8">
-<title>Osint Tools</title>
-<meta name="description" content="Free OSINT tools for username lookup, IP lookup, email investigation and cybersecurity research.">
-<meta name="keywords" content="OSINT, OSINT tools, Username Lookup, IP Lookup, Email Lookup, Cybersecurity">
-<meta name="robots" content="index, follow">
-
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<!-- Font Awesome -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-<link rel="icon" type="image/png" href="osint-tools.png">
-<link rel="stylesheet" href="style.css">
-
-
+    <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
 
+<div class="container">
 
-<header>
-<h1>Osint-Tools</h1>
-<input id="searchBox" placeholder="Search...">
-</header>
+    <!-- Left Side -->
+    <div class="left">
 
-<div class="stats">
-<div>Total: <span id="total"></span></div>
-<div>Favorites: <span id="favCount"></span></div>
+        <h1>OSINT-TOOLS</h1>
+
+        <hr>
+
+        <div class="categories">
+
+            <button class="category" data-category="emails">
+                Emails Osint-Tools
+            </button>
+
+            <button class="category" data-category="ip">
+                IP Osint-Tools
+            </button>
+
+            <button class="category" data-category="domain">
+                Domain Osint-Tools
+            </button>
+
+            <button class="category" data-category="search">
+                Search Osint-Tools
+            </button>
+
+        </div>
+
+    </div>
+
+    <!-- Middle -->
+    <div class="middle">
+
+        <div id="toolsList">
+
+            <!-- JavaScript will create the 10 tools here -->
+
+        </div>
+
+    </div>
+
+    <!-- Right -->
+    <div class="right">
+
+        <div class="tool-details">
+
+            <h2 id="toolTitle">
+                Select Tool
+            </h2>
+
+            <p id="toolDescription">
+                Choose one of the tools to display its description.
+            </p>
+
+            <a
+                id="toolLink"
+                href="#"
+                target="_blank">
+                Tool Link
+            </a>
+
+        </div>
+
+    </div>
+
 </div>
 
-<div class="container" id="container"></div>
-
-<script>
-  // ==================== DATA ====================
-  const tools = [
-    { name: "Shodan", url: "https://shodan.io", cat: "IP" },
-    { name: "Censys", url: "https://censys.io", cat: "IP" },
-    { name: "VirusTotal", url: "https://virustotal.com", cat: "Domain" },
-    { name: "Hunter.io", url: "https://hunter.io", cat: "Email" },
-    { name: "HaveIBeenPwned", url: "https://haveibeenpwned.com", cat: "Email" },
-    { name: "URLScan", url: "https://urlscan.io", cat: "Domain" },
-    { name: "Wayback Machine", url: "https://archive.org", cat: "Search" },
-    { name: "DNSDumpster", url: "https://dnsdumpster.com", cat: "Domain" },
-    { name: "IntelX", url: "https://intelx.io", cat: "Search" },
-    { name: "OTX AlienVault", url: "https://otx.alienvault.com", cat: "IP" },
-    { name: "Holehe", url: "https://github.com/megadose/holehe", cat: "Email" },
-    { name: "ThatsThem", url: "https://thatsthem.com/reverse-email-lookup", cat: "Email" },
-    { name: "IPinfo", url: "https://ipinfo.io", cat: "IP" },
-    { name: "SecurityTrails", url: "https://securitytrails.com/", cat: "Domain" },
-    { name: "WHOXY", url: "https://www.whoxy.com/", cat: "Domain" },
-    { name: "crt.sh", url: "https://crt.sh/", cat: "Domain" }
-  ];
-
-  // ==================== STORAGE ====================
-  let fav = JSON.parse(localStorage.getItem("fav") || "[]");
-  let pin = JSON.parse(localStorage.getItem("pin") || "[]");
-
-  // ==================== RENDER ====================
-  function render(list) {
-    const container = document.getElementById("container");
-    container.innerHTML = "";
-
-    list.sort((a, b) => pin.includes(b.name) - pin.includes(a.name));
-
-    list.forEach(tool => {
-      const isFav = fav.includes(tool.name);
-      const isPin = pin.includes(tool.name);
-
-      container.innerHTML += `
-        <div class="card" onclick="ripple(event)">
-          <div class="cat">${tool.cat}</div>
-          <h3>${tool.name}</h3>
-          <button class="open" onclick="event.stopPropagation(); openLink('${tool.url}')"><i class="fa fa-link"></i></button>
-          <button class="copy" onclick="event.stopPropagation(); copyLink('${tool.url}')"><i class="fa fa-copy"></i></button>
-          <button class="fav" onclick="event.stopPropagation(); toggleFav('${tool.name}')">⭐</button>
-          <button class="pin" onclick="event.stopPropagation(); togglePin('${tool.name}')">📌</button>
-        </div>
-      `;
-    });
-
-    document.getElementById("total").innerText = list.length;
-    document.getElementById("favCount").innerText = fav.length;
-  }
-
-  render(tools);
-
-  // ==================== FUNCTIONS ====================
-  function openLink(url) {
-    window.open(url, "_blank");
-  }
-
-  function copyLink(url) {
-    navigator.clipboard.writeText(url);
-    alert("Copied!");
-  }
-
-  function toggleFav(name) {
-    fav.includes(name) ? fav = fav.filter(x => x !== name) : fav.push(name);
-    localStorage.setItem("fav", JSON.stringify(fav));
-    render(tools);
-  }
-
-  function togglePin(name) {
-    pin.includes(name) ? pin = pin.filter(x => x !== name) : pin.push(name);
-    localStorage.setItem("pin", JSON.stringify(pin));
-    render(tools);
-  }
-
-  // ==================== EVENT LISTENERS ====================
-  document.getElementById("searchBox").addEventListener("input", e => {
-    const val = e.target.value.toLowerCase();
-    render(tools.filter(t => t.name.toLowerCase().includes(val) || t.cat.toLowerCase().includes(val)));
-  });
-
-  document.addEventListener("keydown", e => {
-    if (e.ctrlKey && e.key === "k") {
-      e.preventDefault();
-      document.getElementById("searchBox").focus();
-    }
-  });
-
-  // ==================== RIPPLE EFFECT ====================
-  function ripple(e) {
-    const rippleEl = document.createElement("span");
-    rippleEl.className = "ripple";
-    rippleEl.style.left = e.offsetX + "px";
-    rippleEl.style.top = e.offsetY + "px";
-    e.target.appendChild(rippleEl);
-    setTimeout(() => rippleEl.remove(), 600);
-  }
-</script>
+<script src="script.js"></script>
 
 </body>
-
 </html>
