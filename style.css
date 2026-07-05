@@ -25,16 +25,16 @@ body{
 }
 
 .left h1{
-    font-size:72px;
+    color: whitesmoke;
+    font-size: 72px;
     font-weight:bold;
     margin-bottom:20px;
-    letter-spacing:2px;
 }
 
 .left hr{
     border:none;
-    height:2px;
-    background:white;
+    height:1px;
+    background: white;
     margin-bottom:40px;
 }
 
