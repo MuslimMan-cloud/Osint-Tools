@@ -5,16 +5,16 @@
 const data = {
 
     emails: [
-        {name:"Tool Name", description:"Paragraph about the tool.", link:"#"},
-        {name:"Tool Name", description:"Paragraph about the tool.", link:"#"},
-        {name:"Tool Name", description:"Paragraph about the tool.", link:"#"},
-        {name:"Tool Name", description:"Paragraph about the tool.", link:"#"},
-        {name:"Tool Name", description:"Paragraph about the tool.", link:"#"},
-        {name:"Tool Name", description:"Paragraph about the tool.", link:"#"},
-        {name:"Tool Name", description:"Paragraph about the tool.", link:"#"},
-        {name:"Tool Name", description:"Paragraph about the tool.", link:"#"},
-        {name:"Tool Name", description:"Paragraph about the tool.", link:"#"},
-        {name:"Tool Name", description:"Paragraph about the tool.", link:"#"}
+        {name:"Have I Been Pwned", description:"Checks whether an email address has appeared in known data breaches.", link:"https://haveibeenpwned.com"},
+        {name:"GHunt", description:"Open-source tool for investigating publicly available information associated with Google accounts.", link:"https://github.com/mxrch/GHunt"},
+        {name:"Holehe", description:"Checks if an email address is registered on hundreds of online services.", link:"https://github.com/megadose/holehe"},
+        {name:"EmailRep", description:"Provides reputation data and risk indicators for email addresses.", link:"https://emailrep.io"},
+        {name:"Epieos", description:"Finds publicly accessible information and linked accounts from an email address.", link:"https://epieos.com"},
+        {name:"SpiderFoot Community Edition", description:"Automates OSINT investigations by correlating email, domain, IP, and other public data.", link:"https://www.spiderfoot.net"},
+        {name:"theHarvester", description:"Collects publicly available email addresses and related OSINT from search engines and other sources.", link:"https://github.com/laramies/theHarvester"},
+        {name:"Sherlock", description:"Finds usernames across hundreds of social networks and websites, useful after identifying usernames linked to an email.", link:"https://github.com/sherlock-project/sherlock"},
+        {name:"Maigret", description:"Searches for usernames across thousands of websites to uncover associated online profiles.", link:"https://github.com/soxoj/maigret"},
+        {name:"PhoneBook.cz", description:"Searches publicly indexed email addresses, domains, and subdomains for OSINT investigations.", link:"https://phonebook.cz"}
     ],
 
     ip: [
